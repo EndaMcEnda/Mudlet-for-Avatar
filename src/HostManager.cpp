@@ -312,7 +312,8 @@ QStringList HostManager::defaultPackages(const QString& address, const QString& 
                                       qsl("imperian.com"),
                                       qsl("starmourn.com"),
                                       qsl("stickmud.com")}},
-        {qsl(":/packages/MedBootstrap/MedBootstrap.mpackage"), {qsl("medievia.com")}}
+        {qsl(":/packages/MedBootstrap/MedBootstrap.mpackage"), {qsl("medievia.com")}},
+        {qsl(":/packages/AvatarUI/AvatarUI.mpackage"), {qsl("avatar.outland.org")}}
             // clang-format on
     };
 

@@ -8,6 +8,7 @@
         <file>packages/echo/echo.mpackage</file>
         <file>packages/mpkg/mpkg.mpackage</file>
         <file>packages/MedBootstrap/MedBootstrap.mpackage</file>
+        <file>packages/AvatarUI/AvatarUI.mpackage</file>
         <file>edbee_defaults/Lua.tmLanguage</file>
         <file>edbee_defaults/Mudlet Dark.tmTheme</file>
         <file>edbee_defaults/Mudlet Light.tmTheme</file>

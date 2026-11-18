@@ -92,7 +92,9 @@ public:
              qsl("avatar.outland.org port 3000"),
              qsl(":/icons/avatarmud_480x120.png"),
              qsl("Welcome to AvatarMUD! Select this profile, enter your character name and "
-                 "password (or leave them blank to create a new character), and press Connect.")},
+                 "password (or leave them blank to create a new character), and press Connect."),
+             // the bundled AvatarUI package is the game's interface, so no starter UI:
+             GameDetail::OwnUi::BundledLoader},
 
             // Deliberately without artwork: the connection dialog draws an entry only as its artwork, so this
             // testing aid (it needs Busted, which players lack) is listed and selectable yet invisible, while a
