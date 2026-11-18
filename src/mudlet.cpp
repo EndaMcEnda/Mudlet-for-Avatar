@@ -1457,7 +1457,7 @@ void mudlet::init()
     setAttribute(Qt::WA_DeleteOnClose);
     const QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     setWindowTitle(MudletApp::scmVersion());
-    if (MudletApp::release()) {
+    if (MudletApp::release() || MudletApp::avatarMud()) {
         setWindowIcon(QIcon(qsl(":/icons/mudlet.png")));
     } else if (MudletApp::publicTest()) {
         setWindowIcon(QIcon(qsl(":/icons/mudlet_ptb_256px.png")));

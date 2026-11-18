@@ -1292,6 +1292,11 @@ bool MudletApp::publicTest()
     return buildSuffix().startsWith(qsl("-ptb"));
 }
 
+bool MudletApp::avatarMud()
+{
+    return buildSuffix() == qsl("-AvatarMUD");
+}
+
 bool MudletApp::development()
 {
     return !release() && !publicTest();

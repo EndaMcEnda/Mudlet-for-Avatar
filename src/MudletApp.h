@@ -262,6 +262,7 @@ public:
     static bool release();
     static bool publicTest();
     static bool development();
+    static bool avatarMud();
     static void setNetworkRequestDefaults(const QUrl& url, QNetworkRequest& request);
 
     // Named as a light/dark pair so the preferences' counterpart lookup switches between

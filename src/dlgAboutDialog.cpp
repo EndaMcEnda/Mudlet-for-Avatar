@@ -124,7 +124,7 @@ dlgAboutDialog::dlgAboutDialog(QWidget* parent)
 {
     setupUi(this);
 
-    mSplash = mudlet::getSplashScreen(MudletApp::release(), MudletApp::publicTest());
+    mSplash = mudlet::getSplashScreen(MudletApp::release() || MudletApp::avatarMud(), MudletApp::publicTest());
 
     // Settled once rather than per label: themeTokens() walks four colours to their
     // contrast floors, and the shell builds eighty labels
@@ -205,7 +205,9 @@ QWidget* dlgAboutDialog::buildArtColumn()
     pChipLayout->setSpacing(6);
 
     QString channel;
-    if (MudletApp::release()) {
+    if (MudletApp::avatarMud()) {
+        channel = qsl("AvatarMUD");
+    } else if (MudletApp::release()) {
         //: Chip on the About dialog naming which kind of build of Mudlet this is
         channel = tr("Release");
     } else if (MudletApp::publicTest()) {

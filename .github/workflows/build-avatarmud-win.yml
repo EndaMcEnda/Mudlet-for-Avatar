@@ -1,0 +1,73 @@
+# Builds the AvatarMUD edition of Mudlet for Windows as a portable ZIP.
+# Run it by hand from the Actions tab, or push a tag named AvatarMUD-* to
+# also publish the ZIP as a GitHub Release.
+name: 🔨 Build AvatarMUD Mudlet (windows)
+on:
+  workflow_dispatch:
+  push:
+    tags: ['AvatarMUD-*']
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-2025
+    timeout-minutes: 180
+    env:
+      AVATARMUD_BUILD: '1'
+      WITH_SENTRY: 'OFF'
+      CCACHE_DIR: ${{ github.workspace }}/../ccache
+    steps:
+    - name: Checkout source
+      uses: actions/checkout@v7
+      with:
+        submodules: recursive
+
+    - name: Setup MSYS2
+      uses: msys2/setup-msys2@v2
+      with:
+        msystem: CLANG64
+        update: true
+
+    - name: Build environment setup
+      shell: msys2 {0}
+      env:
+        GITHUB_REPO_TAG: 'false'
+        SENTRY_SEND_DEBUG: '0'
+      run: |
+        $GITHUB_WORKSPACE/CI/setup-windows-sdk.sh
+        $GITHUB_WORKSPACE/CI/validate-deployment-for-windows.sh
+
+    - name: Build
+      shell: msys2 {0}
+      env:
+        GITHUB_REPO_TAG: 'false'
+        GITHUB_SCHEDULED_BUILD: 'false'
+        SENTRY_SEND_DEBUG: '0'
+        MUDLET_PGO_BUILD: 'false'
+      run: $GITHUB_WORKSPACE/CI/build-mudlet-for-windows.sh
+
+    - name: Package
+      shell: msys2 {0}
+      run: |
+        $GITHUB_WORKSPACE/CI/package-mudlet-for-windows.sh
+        $GITHUB_WORKSPACE/CI/create-portable-zip-for-windows.sh
+        mv "$GITHUB_WORKSPACE/Mudlet-portable-clang64.zip" "$GITHUB_WORKSPACE/AvatarMUD-Mudlet-windows64.zip"
+
+    - name: Upload build artifact
+      uses: actions/upload-artifact@v7
+      with:
+        name: AvatarMUD-Mudlet-windows64
+        path: ${{ github.workspace }}/AvatarMUD-Mudlet-windows64.zip
+
+    - name: Publish GitHub Release
+      if: startsWith(github.ref, 'refs/tags/AvatarMUD-')
+      shell: bash
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        gh release create "${GITHUB_REF_NAME}" "${GITHUB_WORKSPACE}/AvatarMUD-Mudlet-windows64.zip" \
+          --repo "${GITHUB_REPOSITORY}" \
+          --title "Mudlet for AvatarMUD (${GITHUB_REF_NAME#AvatarMUD-})" \
+          --notes "Unzip anywhere and run mudlet.exe. It opens straight on the AvatarMUD profile (avatar.outland.org:3000)."

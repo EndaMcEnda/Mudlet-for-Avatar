@@ -846,10 +846,10 @@ int main(int argc, char* argv[])
         }
     }
 
-    const QStringList onlyProfiles = parser.values(onlyPredefinedProfileToShow);
+    const QStringList onlyProfiles = parser.isSet(onlyPredefinedProfileToShow) ? parser.values(onlyPredefinedProfileToShow) : QStringList{qsl("AvatarMUD")};
     const bool offlineProfiles = parser.isSet(openOffline);
     const bool showSplash = parser.isSet(showSplashscreen);
-    QImage splashImage = mudlet::getSplashScreen(MudletApp::release(), MudletApp::publicTest());
+    QImage splashImage = mudlet::getSplashScreen(MudletApp::release() || MudletApp::avatarMud(), MudletApp::publicTest());
 
     if (showSplash) {
         QPainter painter(&splashImage);

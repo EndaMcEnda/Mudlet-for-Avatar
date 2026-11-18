@@ -151,7 +151,10 @@ set(APP_VERSION 5.1.0)
 #   unset (local dev build)         -> "-dev-<sha>"
 #   defined but empty (release)     -> "" (no suffix)
 #   defined with a value (ptb/test) -> "<value>-<sha>"
-if(DEFINED ENV{MUDLET_VERSION_BUILD})
+if(DEFINED ENV{AVATARMUD_BUILD})
+    # AvatarMUD edition: a release-looking build with its own name and no updater
+    set(BUILD_VALUE "-AvatarMUD")
+elseif(DEFINED ENV{MUDLET_VERSION_BUILD})
     if("$ENV{MUDLET_VERSION_BUILD}" STREQUAL "")
         set(BUILD_VALUE "")
     else()
