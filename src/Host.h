@@ -1038,6 +1038,7 @@ public:
     bool mAlertOnNewData = true;
     bool mAllowToSendCommand = true;
     bool mAutoClearCommandLineAfterSend = false;
+    bool mEscapeClearsCommandLine = false;
     bool mHighlightHistory = true;
 
     // Set in constructor and used in (bool) TScript::setScript(const QString&)

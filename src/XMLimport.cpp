@@ -811,6 +811,7 @@ void XMLimport::readHost(Host* pHost)
     setBoolAttributeWithDefault(qsl("mEnableNEWENVIRON"), pHost->mEnableNEWENVIRON, getBoolValueFromLegacyAttributeOrDefault(qsl("forceNewEnvironNegotiationOff"), true, true));
 
     setBoolAttribute(qsl("autoClearCommandLineAfterSend"), pHost->mAutoClearCommandLineAfterSend);
+    setBoolAttributeWithDefault(qsl("escapeClearsCommandLine"), pHost->mEscapeClearsCommandLine, false);
     bool disablePasswordMasking = false;
     setBoolAttributeWithDefault(qsl("disablePasswordMasking"), disablePasswordMasking, false);
     pHost->setDisablePasswordMasking(disablePasswordMasking);

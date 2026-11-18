@@ -582,7 +582,11 @@ bool TCommandLine::event(QEvent* event)
         case Qt::Key_Escape:
             if ((ke->modifiers() & allModifiers) == Qt::NoModifier) {
                 // Escape from tab completion mode if used with NO modifiers
-                selectAll();
+                if (mpHost->mEscapeClearsCommandLine) {
+                    clear();
+                } else {
+                    selectAll();
+                }
                 mCompletion.reset();
                 mCompletion.restartHistoryWalk();
                 mHistoryBuffer = 0;

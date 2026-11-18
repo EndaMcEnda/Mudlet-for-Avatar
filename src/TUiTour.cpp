@@ -240,7 +240,7 @@ void TUiTour::buildSteps()
                       //: Title of the last step of the interface tour
                       tr("That's it - have fun!"),
                       //: Body of the last step of the interface tour. The tour can be re-run via the named menu entry.
-                      tr("For a hands-on lesson, connect to the <b>Mudlet Tutorial</b> game. "
+                      tr("Connect to <b>AvatarMUD</b> and start your adventure. "
                          "And if you ever want to see this tour again, it lives in Help → Take a UI tour.")});
 }
 

@@ -1547,6 +1547,8 @@ void dlgProfilePreferences::setSearchKeywords()
     synonyms.append({label_store_passwords_in, tr("password, keyring, keychain, credentials, sign in, two-factor, 2FA")});
     //: Comma-separated synonyms for the settings search - translate to what a player would type, do not transliterate. This one is for showing the password as it is typed.
     synonyms.append({disable_password_masking_checkbox, tr("password, masking, hidden characters")});
+    //: Comma-separated synonyms for the settings search - translate to what a player would type, do not transliterate. This one is for the Esc key emptying the input line.
+    synonyms.append({checkBox_escapeClearsInputLine, tr("escape, esc, clear, input line, command line")});
     //: Comma-separated synonyms for the settings search - translate to what a player would type, do not transliterate. This one is for telling the game that a screen reader is in use.
     synonyms.append({checkBox_advertiseScreenReader, tr("screen reader, NVDA, JAWS, VoiceOver, Orca, accessibility")});
     //: Comma-separated synonyms for the settings search - translate to what a player would type, do not transliterate. This one is for reaching buttons in scripts and packages with the keyboard.
@@ -4597,6 +4599,7 @@ void dlgProfilePreferences::initWithHost(Host* pHost)
 
     show_sent_text_combobox->setCurrentIndex(static_cast<int>(pHost->mCommandEchoMode));
     auto_clear_input_line_checkbox->setChecked(pHost->mAutoClearCommandLineAfterSend);
+    checkBox_escapeClearsInputLine->setChecked(pHost->mEscapeClearsCommandLine);
     disable_password_masking_checkbox->setChecked(pHost->disablePasswordMasking());
     checkBox_highlightHistory->setChecked(pHost->mHighlightHistory);
     command_separator_lineedit->setText(pHost->mCommandSeparator);
@@ -5546,6 +5549,7 @@ void dlgProfilePreferences::clearHostDetails()
 
     show_sent_text_combobox->setCurrentIndex(static_cast<int>(Host::CommandEchoMode::ScriptControl));
     auto_clear_input_line_checkbox->setChecked(false);
+    checkBox_escapeClearsInputLine->setChecked(false);
     command_separator_lineedit->clear();
 
     checkBox_USE_IRE_DRIVER_BUGFIX->setChecked(false);
@@ -7228,6 +7232,9 @@ void dlgProfilePreferences::applyAll()
         }
         if (mSnapshot.dirty(auto_clear_input_line_checkbox)) {
             pHost->mAutoClearCommandLineAfterSend = auto_clear_input_line_checkbox->isChecked();
+        }
+        if (mSnapshot.dirty(checkBox_escapeClearsInputLine)) {
+            pHost->mEscapeClearsCommandLine = checkBox_escapeClearsInputLine->isChecked();
         }
         if (mSnapshot.dirty(disable_password_masking_checkbox)) {
             pHost->setDisablePasswordMasking(disable_password_masking_checkbox->isChecked());

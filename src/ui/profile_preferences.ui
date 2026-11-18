@@ -613,17 +613,23 @@
            </widget>
           </item>
           <item row="2" column="1">
-           <spacer name="horizontalSpacer_disable_password_masking">
-            <property name="orientation">
-             <enum>Qt::Orientation::Horizontal</enum>
+           <widget class="QCheckBox" name="checkBox_escapeClearsInputLine">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
+            <property name="toolTip">
+             <string>&lt;p&gt;Pressing Esc empties the input line instead of selecting its text.&lt;/p&gt;</string>
             </property>
-           </spacer>
+            <property name="accessibleDescription">
+             <string>Pressing Esc empties the input line instead of selecting its text.</string>
+            </property>
+            <property name="text">
+             <string>Esc clears the input line</string>
+            </property>
+           </widget>
           </item>
           <item row="3" column="0">
            <widget class="QLabel" name="label_show_sent_text">
@@ -5765,6 +5771,7 @@ you can use it but there could be issues with aligning columns of text</string>
   <tabstop>USE_UNIX_EOL</tabstop>
   <tabstop>checkBox_highlightHistory</tabstop>
   <tabstop>disable_password_masking_checkbox</tabstop>
+  <tabstop>checkBox_escapeClearsInputLine</tabstop>
   <tabstop>auto_clear_input_line_checkbox</tabstop>
   <tabstop>checkBox_runAllKeyBindings</tabstop>
   <tabstop>show_sent_text_combobox</tabstop>
