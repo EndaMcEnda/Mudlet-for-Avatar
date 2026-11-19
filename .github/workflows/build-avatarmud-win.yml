@@ -73,6 +73,8 @@ jobs:
         **Windows SmartScreen warning:** this build isn't code-signed, so Windows may say "Windows protected your PC" the first time you run it. Click **More info**, then **Run anyway**.
 
         **Prefer not to run unsigned software?** Install the official Mudlet from https://www.mudlet.org/download/ instead, connect to avatar.outland.org port 3000, then install the **AvatarUI.mpackage** attached below (drag it onto the Mudlet window, or use Toolbox → Package Manager → Install). You get the same AvatarUI interface, already set up.
+
+        **Customising AvatarUI:** type `avconfig` to change the layout, theme, fonts and which modules are shown, and `avchat` for chat window options.
         EOF
         gh release create "${GITHUB_REF_NAME}" \
           "${GITHUB_WORKSPACE}/AvatarMUD-Mudlet-windows64.zip" \
