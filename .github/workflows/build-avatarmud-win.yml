@@ -67,7 +67,16 @@ jobs:
       env:
         GH_TOKEN: ${{ github.token }}
       run: |
-        gh release create "${GITHUB_REF_NAME}" "${GITHUB_WORKSPACE}/AvatarMUD-Mudlet-windows64.zip" \
+        cat > "${RUNNER_TEMP}/notes.md" <<'EOF'
+        Unzip anywhere and run mudlet.exe. It opens straight on the AvatarMUD profile (avatar.outland.org:3000).
+
+        **Windows SmartScreen warning:** this build isn't code-signed, so Windows may say "Windows protected your PC" the first time you run it. Click **More info**, then **Run anyway**.
+
+        **Prefer not to run unsigned software?** Install the official Mudlet from https://www.mudlet.org/download/ instead, connect to avatar.outland.org port 3000, then install the **AvatarUI.mpackage** attached below (drag it onto the Mudlet window, or use Toolbox → Package Manager → Install). You get the same AvatarUI interface, already set up.
+        EOF
+        gh release create "${GITHUB_REF_NAME}" \
+          "${GITHUB_WORKSPACE}/AvatarMUD-Mudlet-windows64.zip" \
+          "${GITHUB_WORKSPACE}/src/packages/AvatarUI/AvatarUI.mpackage" \
           --repo "${GITHUB_REPOSITORY}" \
           --title "Mudlet for AvatarMUD (${GITHUB_REF_NAME#AvatarMUD-})" \
-          --notes "Unzip anywhere and run mudlet.exe. It opens straight on the AvatarMUD profile (avatar.outland.org:3000)."
+          --notes-file "${RUNNER_TEMP}/notes.md"
